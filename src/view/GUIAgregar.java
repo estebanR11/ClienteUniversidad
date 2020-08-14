@@ -108,10 +108,6 @@ public class GUIAgregar extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAgregar)
-                .addGap(156, 156, 156))
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,6 +126,10 @@ public class GUIAgregar extends javax.swing.JFrame {
                     .addComponent(txtCelular)
                     .addComponent(txtEdad))
                 .addGap(117, 117, 117))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(153, 153, 153)
+                .addComponent(btnAgregar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,9 +192,28 @@ public class GUIAgregar extends javax.swing.JFrame {
        String codigo = txtCodigo.getText();
        
        
-        try {
-            servicio.anadirEstudiante(nombre,Integer.parseInt(cedula) ,codigo,correo , Integer.parseInt(celular), Integer.parseInt(edad));
-            JOptionPane.showMessageDialog(this, servicio.buscarEstudiantePorCodigo("123"));
+        try 
+        {
+            if(servicio.existeCelular(Integer.parseInt(celular)))
+            {
+                 JOptionPane.showMessageDialog(this, "El celular ya existe");
+            
+            }
+            else if(servicio.usuarioExiste(codigo))
+            {
+                 JOptionPane.showMessageDialog(this, "El codigo ya existe");
+            
+            }
+            else  if(servicio.existeCorreo(correo))
+            {
+                 JOptionPane.showMessageDialog(this, "El correo ya existe");
+            
+            }
+            else{
+             servicio.anadirEstudiante(nombre,Integer.parseInt(cedula) ,codigo,correo , Integer.parseInt(celular), Integer.parseInt(edad));
+            JOptionPane.showMessageDialog(this, "Estudiante agregado");
+            }
+            
             
         } catch (RemoteException ex) {
             Logger.getLogger(GUIAgregar.class.getName()).log(Level.SEVERE, null, ex);

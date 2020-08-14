@@ -173,7 +173,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
 
     private void jMenuItemBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBuscarActionPerformed
         // TODO add your handling code here:
-        GUIBuscar guiBuscar = new GUIBuscar();
+        GUIBuscar guiBuscar = new GUIBuscar(servicio);
         guiBuscar.setVisible(true);
     }//GEN-LAST:event_jMenuItemBuscarActionPerformed
 
