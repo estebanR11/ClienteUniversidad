@@ -45,6 +45,8 @@ public class GUIPrincipal extends javax.swing.JFrame {
         jMenuItemModificar = new javax.swing.JMenuItem();
         jMenuItemBuscar = new javax.swing.JMenuItem();
         jMenuItemListar = new javax.swing.JMenuItem();
+        jMenuGrafica = new javax.swing.JMenu();
+        jMenuItemGrafica = new javax.swing.JMenuItem();
         jMenuAyuda = new javax.swing.JMenu();
         jMenuItemAcercaDe = new javax.swing.JMenuItem();
 
@@ -107,6 +109,18 @@ public class GUIPrincipal extends javax.swing.JFrame {
         jMenuAcciones.add(jMenuItemListar);
 
         jMenuBar.add(jMenuAcciones);
+
+        jMenuGrafica.setText("Varios");
+
+        jMenuItemGrafica.setText("Grafica");
+        jMenuItemGrafica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemGraficaActionPerformed(evt);
+            }
+        });
+        jMenuGrafica.add(jMenuItemGrafica);
+
+        jMenuBar.add(jMenuGrafica);
 
         jMenuAyuda.setText("Ayuda");
 
@@ -183,16 +197,25 @@ public class GUIPrincipal extends javax.swing.JFrame {
         guiListar.setVisible(true);
     }//GEN-LAST:event_jMenuItemListarActionPerformed
 
+    private void jMenuItemGraficaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGraficaActionPerformed
+        // TODO add your handling code here:
+        
+        GUIGrafica guiGrafica = new GUIGrafica(servicio);
+        guiGrafica.setVisible(true);
+    }//GEN-LAST:event_jMenuItemGraficaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenuAcciones;
     private javax.swing.JMenu jMenuArchivo;
     private javax.swing.JMenu jMenuAyuda;
     private javax.swing.JMenuBar jMenuBar;
+    private javax.swing.JMenu jMenuGrafica;
     private javax.swing.JMenuItem jMenuItemAcercaDe;
     private javax.swing.JMenuItem jMenuItemAgregar;
     private javax.swing.JMenuItem jMenuItemBuscar;
     private javax.swing.JMenuItem jMenuItemEliminar;
+    private javax.swing.JMenuItem jMenuItemGrafica;
     private javax.swing.JMenuItem jMenuItemListar;
     private javax.swing.JMenuItem jMenuItemModificar;
     private javax.swing.JMenuItem jMenuItemSalir;

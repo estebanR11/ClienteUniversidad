@@ -66,6 +66,21 @@
             </MenuItem>
           </SubComponents>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenuGrafica">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Varios"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemGrafica">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Grafica"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemGraficaActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
         <Menu class="javax.swing.JMenu" name="jMenuAyuda">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ayuda"/>
