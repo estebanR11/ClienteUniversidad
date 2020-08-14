@@ -24,6 +24,6 @@ public interface IServicioUniversidad extends Remote{
    public boolean existeCelular(int pCelular)throws RemoteException;
    public boolean usuarioExiste( String pCodigo )throws RemoteException;
    public boolean existeCedula( int pCedula )throws RemoteException;
-     
+   public ArrayList getEstudiantes()throws RemoteException;  
     
 }

@@ -179,7 +179,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
 
     private void jMenuItemListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListarActionPerformed
         // TODO add your handling code here:
-        GUIListar guiListar = new GUIListar();
+        GUIListar guiListar = new GUIListar(servicio);
         guiListar.setVisible(true);
     }//GEN-LAST:event_jMenuItemListarActionPerformed
 
