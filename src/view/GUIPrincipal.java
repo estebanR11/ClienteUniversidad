@@ -152,7 +152,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
     private void jMenuItemEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEliminarActionPerformed
         // TODO add your handling code here:
         
-        GUIEliminar guiEliminar = new GUIEliminar();
+        GUIEliminar guiEliminar = new GUIEliminar(servicio);
         guiEliminar.setVisible(true);
     }//GEN-LAST:event_jMenuItemEliminarActionPerformed
 
@@ -167,7 +167,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
     private void jMenuItemModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemModificarActionPerformed
         // TODO add your handling code here:
         
-        GUIModificar guiModificar = new GUIModificar();
+        GUIModificar guiModificar = new GUIModificar(servicio);
         guiModificar.setVisible(true);
     }//GEN-LAST:event_jMenuItemModificarActionPerformed
 

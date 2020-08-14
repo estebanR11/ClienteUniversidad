@@ -15,7 +15,6 @@ import java.util.ArrayList;
  */
 public interface IServicioUniversidad extends Remote{
     
-
    public void setEstudiantes(ArrayList pEstudiantes)throws RemoteException;
    public void anadirEstudiante(String pNombre, int pCedula, String pCodigo, String pCorreo, int pCelular,int edad )throws RemoteException;
    public void eliminarPorCodigo(String pCodigo)throws RemoteException;
@@ -24,6 +23,7 @@ public interface IServicioUniversidad extends Remote{
    public boolean existeCorreo(String pCorreo)throws RemoteException;
    public boolean existeCelular(int pCelular)throws RemoteException;
    public boolean usuarioExiste( String pCodigo )throws RemoteException;
-    
+   public boolean existeCedula( int pCedula )throws RemoteException;
+     
     
 }

@@ -5,17 +5,27 @@
  */
 package view;
 
+import estructural.Estudiante;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import model.IServicioUniversidad;
+
 /**
  *
  * @author Cristian Devia
  */
 public class GUIEliminar extends javax.swing.JFrame {
-
+private final IServicioUniversidad servicio;
     /**
      * Creates new form GUIEliminar
      */
-    public GUIEliminar() {
+    public GUIEliminar(IServicioUniversidad pServicio) 
+    {
+        servicio = pServicio;
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -35,9 +45,9 @@ public class GUIEliminar extends javax.swing.JFrame {
         labCedula = new javax.swing.JLabel();
         labCorreo = new javax.swing.JLabel();
         labCelular = new javax.swing.JLabel();
-        txtNombre1 = new javax.swing.JTextField();
-        txtNombre2 = new javax.swing.JTextField();
-        txtNombre3 = new javax.swing.JTextField();
+        txtCorreo = new javax.swing.JTextField();
+        txtCelular = new javax.swing.JTextField();
+        txtCedula = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -46,6 +56,11 @@ public class GUIEliminar extends javax.swing.JFrame {
         labCodigo.setText("Código");
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         labNombre.setText("Nombre");
 
@@ -56,6 +71,11 @@ public class GUIEliminar extends javax.swing.JFrame {
         labCelular.setText("Celular");
 
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,9 +94,9 @@ public class GUIEliminar extends javax.swing.JFrame {
                             .addGap(18, 18, 18)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txtNombre)
-                                .addComponent(txtNombre1, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
-                                .addComponent(txtNombre2, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
-                                .addComponent(txtNombre3, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)))
+                                .addComponent(txtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                                .addComponent(txtCelular, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                                .addComponent(txtCedula, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)))
                         .addGroup(layout.createSequentialGroup()
                             .addGap(76, 76, 76)
                             .addComponent(btnEliminar)))
@@ -103,15 +123,15 @@ public class GUIEliminar extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labCedula)
-                    .addComponent(txtNombre3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labCorreo)
-                    .addComponent(txtNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labCelular)
-                    .addComponent(txtNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnEliminar)
                 .addContainerGap(30, Short.MAX_VALUE))
@@ -119,6 +139,52 @@ public class GUIEliminar extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        
+        String codigo = txtCodigo.getText();
+        try 
+        {
+         Estudiante buscado = servicio.buscarEstudiantePorCodigo(codigo);
+         if(buscado==null)
+         {
+             JOptionPane.showMessageDialog(this, "El estudiante no existe");
+         }
+         else
+         {
+              
+              txtNombre.setText(buscado.getNombre());
+              txtCedula.setText(String.valueOf(buscado.getCedula()));
+              txtCorreo.setText(buscado.getCorreo());
+              txtCelular.setText(String.valueOf(buscado.getCelular()));
+              
+              
+         }
+            
+            
+        } 
+        catch (RemoteException ex) {
+            Logger.getLogger(GUIBuscar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        String codigo = txtCodigo.getText();
+    try 
+    {
+        servicio.eliminarPorCodigo(codigo);
+        JOptionPane.showMessageDialog(this, "Estudiante eliminado");
+          txtNombre.setText("");
+              txtCedula.setText("");
+              txtCorreo.setText("");
+              txtCelular.setText("");
+        
+    } catch (RemoteException ex) {
+        Logger.getLogger(GUIEliminar.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -129,10 +195,10 @@ public class GUIEliminar extends javax.swing.JFrame {
     private javax.swing.JLabel labCodigo;
     private javax.swing.JLabel labCorreo;
     private javax.swing.JLabel labNombre;
+    private javax.swing.JTextField txtCedula;
+    private javax.swing.JTextField txtCelular;
     private javax.swing.JTextField txtCodigo;
+    private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtNombre1;
-    private javax.swing.JTextField txtNombre2;
-    private javax.swing.JTextField txtNombre3;
     // End of variables declaration//GEN-END:variables
 }

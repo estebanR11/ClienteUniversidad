@@ -209,9 +209,20 @@ public class GUIAgregar extends javax.swing.JFrame {
                  JOptionPane.showMessageDialog(this, "El correo ya existe");
             
             }
+            else if(servicio.existeCedula(Integer.parseInt(cedula)))
+            {
+                 JOptionPane.showMessageDialog(this, "La cedula ya existe");
+            }
             else{
              servicio.anadirEstudiante(nombre,Integer.parseInt(cedula) ,codigo,correo , Integer.parseInt(celular), Integer.parseInt(edad));
             JOptionPane.showMessageDialog(this, "Estudiante agregado");
+            
+            txtNombre.setText("");
+            txtCedula.setText("");
+            txtCorreo.setText("");
+            txtEdad.setText("");
+            txtCelular.setText("");
+            txtCodigo.setText("");
             }
             
             

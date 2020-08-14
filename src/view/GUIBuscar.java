@@ -95,7 +95,22 @@ public class GUIBuscar extends javax.swing.JFrame {
          }
          else
          {
-              JOptionPane.showMessageDialog(this, buscado.getNombre() );
+             String nombre= buscado.getNombre();
+             String codigoBuscado = buscado.getCodigo();
+             String celular = String.valueOf(buscado.getCelular());
+             String cedula = String.valueOf(buscado.getCedula());
+             String correo = buscado.getCorreo();
+             String edad = String.valueOf(buscado.getEdad());
+             
+              JOptionPane.showMessageDialog(this, "Nombre: " +nombre +"\n"
+              + "Código: " + codigoBuscado + "\n"
+              + "Cédula: " + cedula + "\n"
+              + "Celular: " + celular + "\n"
+              + "Correo: " + correo + "\n"
+              + "Edad: " + edad );
+              
+              
+              txtCodigo.setText("");
          }
             
             
