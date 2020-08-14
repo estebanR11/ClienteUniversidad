@@ -7,6 +7,7 @@ package view;
 
 import estructural.Estudiante;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -196,11 +197,7 @@ public class GUIModificar extends javax.swing.JFrame {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
-        String nombre = txtNombre.getText();
-        int cedula = Integer.parseInt(txtCedula.getText());
-        String correo = txtCorreo.getText();
-        int celular = Integer.parseInt(txtCelular.getText());
-        int edad = Integer.parseInt(txtEdad.getText());
+      
         String codigo = txtCodigo.getText();
         
         try 
@@ -210,10 +207,62 @@ public class GUIModificar extends javax.swing.JFrame {
             {
                 JOptionPane.showMessageDialog(this, "El estudiante no existe");
             }
+            else if( txtCedula.getText().equals(null) || txtCedula.getText().equals(""))
+            {
+                JOptionPane.showMessageDialog(this, "Cedula no valida");
+            }
+            else if( txtCelular.getText().equals(null) || txtCelular.getText().equals(""))
+            {
+                JOptionPane.showMessageDialog(this, "Celular no valido");
+            }
+            else if( txtEdad.getText().equals(null) || txtEdad.getText().equals(""))
+            {
+                JOptionPane.showMessageDialog(this, "Edad no valida");
+            }
+            else if(txtNombre.getText().equals(null) || txtNombre.getText().equals(""))
+            {
+                JOptionPane.showMessageDialog(this, "Nombre invalido");
+            }
+            else if(txtCorreo.getText().equals(null) || txtCorreo.getText().equals(""))
+            {
+                JOptionPane.showMessageDialog(this, "correo invalido");
+            }            
+            
             else
             {
-            servicio.actualizarPorCodigo(codigo, nombre, cedula, correo, celular, edad);
-            JOptionPane.showMessageDialog(this, "estudiante modificado");
+            ArrayList estudiantes = servicio.getEstudiantes();
+            boolean centinela = false;
+            for(int i= 0;i<estudiantes.size() && centinela ==false;i++)
+            {
+                String nombre = txtNombre.getText();
+                int cedula = Integer.parseInt(txtCedula.getText());
+                String correo = txtCorreo.getText();
+                int celular = Integer.parseInt(txtCelular.getText());
+                int edad = Integer.parseInt(txtEdad.getText());
+                Estudiante actual = (Estudiante) estudiantes.get(i);
+                
+                if(actual.getCedula() == cedula)
+                {
+                    centinela = true;
+                     JOptionPane.showMessageDialog(this, "Existe la cedula");
+                }
+                else if(actual.getCorreo().equals(actual.getCorreo()))
+                {
+                    centinela = true;
+                     JOptionPane.showMessageDialog(this, "Existe el correo");
+                }
+                   else if(actual.getCelular() == celular)
+                {
+                    centinela = true;
+                     JOptionPane.showMessageDialog(this, "Existe el celular");
+                }
+                else
+                   {
+                        servicio.actualizarPorCodigo(codigo, nombre, cedula, correo, celular, edad);
+                         JOptionPane.showMessageDialog(this, "estudiante modificado");
+                   }
+            }
+           
             txtNombre.setText("");
             txtCedula.setText("");
             txtCorreo.setText("");
